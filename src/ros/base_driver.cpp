@@ -410,7 +410,7 @@ void sptam::base_driver::publishKFs(const uint32_t seq, const ros::Time& time, c
   for(const auto& keyframe : keyframes){
     geometry_msgs::PoseStamped pose_msg;
 
-    pose_msg.header.seq = seq;
+    pose_msg.header.seq = keyframe->GetId();
     pose_msg.header.stamp = time;
     pose_msg.header.frame_id = map_frame_;
     
