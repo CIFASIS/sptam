@@ -82,7 +82,9 @@ class stereo_driver : public base_driver
 
   // ROS variables
 
-    size_t lastImageSeq_;
+    size_t lastImageSeq_, keyframeCount_;
+
+    ros::Publisher pub_kf_img_l_, pub_kf_img_r_, pub_kf_info_l_, pub_kf_info_r_;
 
     image_transport::ImageTransport imgTransport_;
 

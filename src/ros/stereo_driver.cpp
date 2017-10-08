@@ -55,7 +55,8 @@
 sptam::stereo_driver::stereo_driver(ros::NodeHandle& nh, ros::NodeHandle& nhp)
   : base_driver(nh, nhp)
   , cameraParametersLeft_( nullptr ), cameraParametersRight_( nullptr )
-  , lastImageSeq_( 0 ), imgTransport_( nhp )
+  , lastImageSeq_( 0 ), keyframeCount_( 0 )
+  , imgTransport_( nhp )
 {
   // Get node parameters
 
@@ -159,6 +160,11 @@ sptam::stereo_driver::stereo_driver(ros::NodeHandle& nh, ros::NodeHandle& nhp)
    * Se puede usar getNumThreads() para ver cuantos setea por si solo
    */
   //cv::setNumThreads(0);
+
+  pub_kf_img_l_ = nhp.advertise<sensor_msgs::Image>("/keyframe/left/image_rect", 100);
+  pub_kf_info_l_ = nhp.advertise<sensor_msgs::CameraInfo>("/keyframe/left/camera_info", 100);
+  pub_kf_img_r_ = nhp.advertise<sensor_msgs::Image>("/keyframe/right/image_rect", 100);
+  pub_kf_info_r_ = nhp.advertise<sensor_msgs::CameraInfo>("/keyframe/right/camera_info", 100);
 
   ROS_INFO("S-PTAM stereo node initialized.");
 }
@@ -279,6 +285,17 @@ void sptam::stereo_driver::onImages(
   #endif
 
   onFrame(currentSeq, currentTime, frame, tracker_view);
+
+  /* Publish images on new keyframes */
+  if (sptam_->GetMap().getKeyframes().size() > keyframeCount_) {
+    ROS_DEBUG("New keyframe! seq = %lu", currentSeq);
+    keyframeCount_ = sptam_->GetMap().getKeyframes().size();
+
+    pub_kf_img_l_.publish(img_msg_left);
+    pub_kf_info_l_.publish(left_info);
+    pub_kf_img_r_.publish(img_msg_right);
+    pub_kf_info_r_.publish(right_info);
+  }
 }
 
 void sptam::stereo_driver::loadCameraCalibration(
