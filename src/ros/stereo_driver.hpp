@@ -84,7 +84,7 @@ class stereo_driver : public base_driver
 
     size_t lastImageSeq_, keyframeCount_;
 
-    ros::Publisher pub_kf_img_l_, pub_kf_img_r_, pub_kf_info_l_, pub_kf_info_r_;
+    image_transport::CameraPublisher pub_kf_l_, pub_kf_r_;
 
     image_transport::ImageTransport imgTransport_;
 

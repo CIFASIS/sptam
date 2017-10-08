@@ -161,10 +161,8 @@ sptam::stereo_driver::stereo_driver(ros::NodeHandle& nh, ros::NodeHandle& nhp)
    */
   //cv::setNumThreads(0);
 
-  pub_kf_img_l_ = nhp.advertise<sensor_msgs::Image>("/keyframe/left/image_rect", 100);
-  pub_kf_info_l_ = nhp.advertise<sensor_msgs::CameraInfo>("/keyframe/left/camera_info", 100);
-  pub_kf_img_r_ = nhp.advertise<sensor_msgs::Image>("/keyframe/right/image_rect", 100);
-  pub_kf_info_r_ = nhp.advertise<sensor_msgs::CameraInfo>("/keyframe/right/camera_info", 100);
+  pub_kf_l_ = imgTransport_.advertiseCamera("/keyframe/left/image_rect", 100);
+  pub_kf_r_ = imgTransport_.advertiseCamera("/keyframe/right/image_rect", 100);
 
   ROS_INFO("S-PTAM stereo node initialized.");
 }
@@ -291,10 +289,8 @@ void sptam::stereo_driver::onImages(
     ROS_DEBUG("New keyframe! seq = %lu", currentSeq);
     keyframeCount_ = sptam_->GetMap().getKeyframes().size();
 
-    pub_kf_img_l_.publish(img_msg_left);
-    pub_kf_info_l_.publish(left_info);
-    pub_kf_img_r_.publish(img_msg_right);
-    pub_kf_info_r_.publish(right_info);
+    pub_kf_l_.publish(img_msg_left, left_info);
+    pub_kf_r_.publish(img_msg_right, right_info);
   }
 }
 
