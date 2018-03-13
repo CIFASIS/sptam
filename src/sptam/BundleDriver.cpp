@@ -39,7 +39,7 @@
 class PointVertexData : public G2ODriver::VertexData
 {
   public:
-
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     PointVertexData(const sptam::Map::SharedPoint& point)
       : point_( point ) {}
 
@@ -54,7 +54,7 @@ class PointVertexData : public G2ODriver::VertexData
 class CameraVertexData : public G2ODriver::VertexData
 {
   public:
-
+  EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     CameraVertexData(const sptam::Map::SharedKeyFrame& keyFrame)
       : keyFrame_( keyFrame ) {}
 

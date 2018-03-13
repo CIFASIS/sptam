@@ -54,7 +54,7 @@ namespace sptam
 class stereo_driver : public base_driver
 {
   public:
-
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     stereo_driver(ros::NodeHandle& nh, ros::NodeHandle& nhp);
 
   protected:

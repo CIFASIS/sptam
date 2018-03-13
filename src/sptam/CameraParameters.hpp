@@ -45,7 +45,7 @@
 class CameraParameters
 {
   public:
-
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     CameraParameters(const cv::Matx33d& intrinsic, size_t image_width, size_t image_height, double frustum_near_plane_distance, double frustum_far_plane_distance, double baseline)
       : intrinsic_( intrinsic ), image_width_( image_width ), image_height_( image_height )
       , horizontal_fov_( computeFOV( intrinsic(0, 0), image_width ) )
