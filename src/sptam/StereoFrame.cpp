@@ -185,7 +185,7 @@ void StereoFrame::FindMatches(const Measurement::Source source,
 
 #define PROFILE_INTERNAL_TRIANGULATE 0
 
-void StereoFrame::TriangulatePoints(const RowMatcher& matcher, std::vector<MapPoint, Eigen::aligned_allocator<MapPoint> > &points, std::vector<Measurement> &measurements)/* const*/
+void StereoFrame::TriangulatePoints(const RowMatcher& matcher, std::aligned_vector<MapPoint> &points, std::vector<Measurement> &measurements)/* const*/
 {
 #if defined(SHOW_PROFILING) && PROFILE_INTERNAL_TRIANGULATE
   sptam::Timer t_lock, t_create;
@@ -260,7 +260,7 @@ void StereoFrame::CreatePoints(
   const RowMatcher& matcher,
   const std::vector<cv::KeyPoint>& keypointsLeft, const cv::Mat& allDescriptorsLeft,
   const std::vector<cv::KeyPoint>& keypointsRight, const cv::Mat& allDescriptorsRight,
-  std::vector<MapPoint, Eigen::aligned_allocator<MapPoint> >& points, std::list<std::pair<size_t, size_t>>& matches
+  std::aligned_vector<MapPoint>& points, std::list<std::pair<size_t, size_t>>& matches
 )
 {
 #if defined(SHOW_PROFILING) && PROFILE_INTERNAL_CREATE

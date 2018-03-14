@@ -200,7 +200,7 @@ sptam::Map::SharedKeyFrame MapMaker::AddKeyFrame(const StereoFrame& frame, /*con
   return keyFrame;
 }
 
-void MapMaker::addStereoPoints(/*const */sptam::Map::SharedKeyFrame& keyFrame, const std::vector<MapPoint,Eigen::aligned_allocator<MapPoint>>& points, const std::vector<Measurement>& measurements)
+void MapMaker::addStereoPoints(/*const */sptam::Map::SharedKeyFrame& keyFrame, const std::aligned_vector<MapPoint> &points, const std::vector<Measurement>& measurements)
 {
   #ifdef SHOW_PROFILING
     sptam::Timer t_lock_add_points;

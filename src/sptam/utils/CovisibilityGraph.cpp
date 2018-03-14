@@ -31,6 +31,7 @@
  * University of Buenos Aires
  */
 #include "CovisibilityGraph.hpp"
+#include "eigen_alignment.hpp"
 
 /* These are the non-inline definitions for the CovisibilityGraph class methods
  * declared in CovisibilityGraph.hpp. Since the class is heavily templated, and
@@ -48,7 +49,7 @@
 template<typename KEYFRAME_T, typename MAP_POINT_T, typename MEAS_T>
 typename CovisibilityGraph<KEYFRAME_T, MAP_POINT_T, MEAS_T>::SharedKeyFrame CovisibilityGraph<KEYFRAME_T, MAP_POINT_T, MEAS_T>::addKeyFrame( const KEYFRAME_T& keyFrame )
 {
-  SharedKeyFrame sKF(new KeyFrame( keyFrame ));
+  SharedKeyFrame sKF = std::make_shared_aligned<KeyFrame>( keyFrame );
 
   keyframes_.push_back(sKF);
 
@@ -70,7 +71,7 @@ void CovisibilityGraph<KEYFRAME_T, MAP_POINT_T, MEAS_T>::removeKeyFrame( const C
 template<typename KEYFRAME_T, typename MAP_POINT_T, typename MEAS_T>
 typename CovisibilityGraph<KEYFRAME_T, MAP_POINT_T, MEAS_T>::SharedMapPoint CovisibilityGraph<KEYFRAME_T, MAP_POINT_T, MEAS_T>::addMapPoint( const MAP_POINT_T& mapPoint )
 {
-  SharedMapPoint sMP(new MapPoint( mapPoint ));
+  SharedMapPoint sMP = std::make_shared_aligned<MapPoint>( mapPoint );
 
   mappoints_.push_back(sMP);
 
@@ -123,7 +124,7 @@ void CovisibilityGraph<KEYFRAME_T, MAP_POINT_T, MEAS_T>::addMeasurement( SharedK
 
   // add Keyframe-Point Measurement
 
-  SharedMeasurement meas = std::shared_ptr<Measurement>(new Measurement(edge, keyFrame, mapPoint));
+  SharedMeasurement meas = std::make_shared_aligned<Measurement>(edge, keyFrame, mapPoint);
   /* There exist a moment where keyframe may be connected to the mappoint 
   * but not yet the mappoint to the keyframe (concurrency) */
   keyFrame->addMeasurement(meas);

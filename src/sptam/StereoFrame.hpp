@@ -37,6 +37,7 @@
 #include "MapPoint.hpp"
 #include "RowMatcher.hpp"
 #include "RectifiedCameraParameters.hpp"
+#include "utils/eigen_alignment.hpp"
 
 #include <memory>
 #include <list>
@@ -74,7 +75,7 @@ class StereoFrame
      * Try to match and triangulate unmatched features from
      * the left and right frames.
      */
-    void TriangulatePoints(const RowMatcher& matcher, std::vector<MapPoint,Eigen::aligned_allocator<MapPoint>>& points, std::vector<Measurement>& measurements);
+    void TriangulatePoints(const RowMatcher& matcher, std::aligned_vector<MapPoint> &points, std::vector<Measurement>& measurements);
 
     void UpdateCameraPose(const CameraPose& cameraPose);
 
@@ -164,7 +165,7 @@ class StereoFrame
     void CreatePoints(const RowMatcher& matcher,
       const std::vector<cv::KeyPoint>& keypoints1, const cv::Mat& descriptors1,
       const std::vector<cv::KeyPoint>& keypoints2, const cv::Mat& descriptors2,
-      std::vector<MapPoint, Eigen::aligned_allocator<MapPoint> > &points, std::list<std::pair<size_t, size_t> >& matches
+      std::aligned_vector<MapPoint>& points, std::list<std::pair<size_t, size_t> >& matches
     );
 
     static CameraPose ComputeRightCameraPose(const CameraPose& leftCameraPose, const double stereo_baseline);

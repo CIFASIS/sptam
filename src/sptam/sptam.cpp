@@ -38,6 +38,7 @@
 #include "utils/cv2eigen.hpp"
 #include <opencv2/core/eigen.hpp>
 #include "utils/projective_math.hpp"
+#include "utils/eigen_alignment.hpp"
 
 #include "KeyFramePolicy.hpp"
 #include "FeatureExtractorThread.hpp"
@@ -78,7 +79,7 @@ SPTAM::SPTAM(const RowMatcher& rowMatcher, const Parameters& params)
 
 void SPTAM::init(/*const*/ StereoFrame& frame)
 {
-  std::vector<MapPoint, Eigen::aligned_allocator<MapPoint> > points;
+  std::aligned_vector<MapPoint> points;
   std::vector<Measurement> measurements;
 
   frame.TriangulatePoints(rowMatcher_, points, measurements);

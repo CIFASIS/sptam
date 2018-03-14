@@ -39,6 +39,7 @@
 #include "RowMatcher.hpp"
 #include "sptamParameters.hpp"
 #include "utils/fixed_queue.hpp"
+#include "utils/eigen_alignment.hpp"
 
 #ifdef USE_LOOPCLOSURE
 #include "loopclosing/LoopClosing.hpp"
@@ -69,7 +70,7 @@ class MapMaker
      */
     virtual sptam::Map::SharedKeyFrame AddKeyFrame(const StereoFrame& frame, /*const */std::list<Match>& measurements);
 
-    void addStereoPoints(/*const */sptam::Map::SharedKeyFrame& keyFrame, const std::vector<MapPoint,Eigen::aligned_allocator<MapPoint>>& points, const std::vector<Measurement>& measurements);
+    void addStereoPoints(/*const */sptam::Map::SharedKeyFrame& keyFrame, const std::aligned_vector<MapPoint>& points, const std::vector<Measurement>& measurements);
 
     #ifdef USE_LOOPCLOSURE
     void setLoopClosing(std::shared_ptr<LoopClosing>& lc)
