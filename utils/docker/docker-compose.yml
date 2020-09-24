@@ -1,0 +1,20 @@
+version: "2"
+services:
+  devcontainer:
+    build:
+      context: .
+      args:
+        USER_UID: ${USER_UID}
+        USER_GID: ${USER_GID}
+        USER_NAME: ${USER_NAME}
+    user: ${USER_UID}:${USER_GID}
+    hostname: devcontainer
+    container_name: sptam-devcontainer
+    volumes:
+      - ../..:/home/${USER_NAME}/catkin_ws/src/sptam
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Uncomment this line if you want to mount your own home directory
+      # - $HOME:$HOME
+    environment:
+      - DISPLAY=${DISPLAY}
+    tty: true
