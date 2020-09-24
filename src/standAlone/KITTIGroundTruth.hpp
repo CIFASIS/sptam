@@ -34,6 +34,7 @@
 
 #include <string>
 #include <eigen3/Eigen/Geometry>
+#include <eigen3/Eigen/StdVector>
 
 #include "../sptam/PosePredictor.hpp"
 
@@ -55,7 +56,7 @@ class KITTIGroundTruth : public PosePredictor
     // Reset the model given a new camera pose. Note: This method will be called when it happens an abrupt change in the pose (LoopClosing)
     void applyCorrection(const Eigen::Matrix4d& correction) override;
 
-    std::vector<Eigen::Vector3d> positions_;
+    std::vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d>> positions_;
     std::vector<Eigen::Quaterniond> orientations_;
 
   private:
