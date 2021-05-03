@@ -29,7 +29,7 @@ function do_recreate {
     docker container rm sptam-devcontainer
 
     # Rebuild with --no-cache
-    docker-compose -f ./utils/docker/docker-compose.yml build
+    docker-compose --env-file ./utils/.env --file ./utils/docker/docker-compose.yml build
 
     # Restore original directory
     popd > /dev/null 2>&1
@@ -43,7 +43,7 @@ function do_start {
     ./utils/docker/configure-env.sh
 
     # Up
-    docker-compose -f ./utils/docker/docker-compose.yml up -d
+    docker-compose --env-file ./utils/.env --file ./utils/docker/docker-compose.yml up -d
 
     # Restore original directory
     popd > /dev/null 2>&1
@@ -54,7 +54,7 @@ function do_stop {
     pushd PARENT_PATH > /dev/null 2>&1
 
     # Stop
-    docker-compose -f ./utils/docker/docker-compose.yml stop
+    docker-compose --env-file ./utils/.env --file ./utils/docker/docker-compose.yml stop
 
     # Restore original directory
     popd > /dev/null 2>&1
