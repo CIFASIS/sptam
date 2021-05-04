@@ -18,6 +18,7 @@ Proc. of The International Conference on Intelligent Robots and Systems (IROS), 
 ## Table of Contents
   - [License](#license)
   - [Disclaimer](#disclaimer)
+  - [Docker](#docker)
   - [Dependencies](#dependencies)
     - [ROS](#ros)
     - [ros-utils](#ros-utils)
@@ -93,6 +94,15 @@ If you use S-PTAM in an academic work, please cite:
 # Disclaimer
 This site and the code provided here are under active development. Even though we try to only release working high quality code, this version might still contain some issues. Please use it with caution.
 
+# Docker
+Use S-PTAM with Docker (RECOMENDED)
+
+`docker build . sptam:latest`
+
+`docker run --name sptam --rm --net=host -it sptam:latest`
+
+Note: The flag `--net=host` allowes the ROS instance running in the Docker container communicates with the ROS apps running in the Host. This is, you can use S-PTAM from the docker terminal and run the rosbags and rviz from the Host terminal.
+
 # Dependencies
 
 ## ROS
@@ -111,9 +121,9 @@ Suitespare is a dependency, so it needs to be installed
 
 ## ros-utils
 
-Install our [ros-utils](https://github.com/lrse/ros-utils) library from the source code provided in  
+Install our [ros-utils](https://github.com/CIFASIS/ros-utils) library from the source code provided in  
 
-`git clone git@github.com:lrse/ros-utils.git`
+`git clone git@github.com:CIFASIS/ros-utils.git`
 
 ## g2o
 
@@ -152,7 +162,6 @@ Tested until commit [70089a38056e8aebd5a2ebacbcb67d3751433f32](https://github.co
 
 `git checkout 70089a38056e8aebd5a2ebacbcb67d3751433f32`
 
-
 ### DBoW2
 
 Install [DBoW2](https://github.com/dorian3d/DBoW2) library from source code
@@ -187,7 +196,7 @@ Tested until commit [2e2d21917fd2fb75f2134e6d5be7a2536cbc7eb1](https://github.co
 
 # Installation
 
-`git clone git@github.com:lrse/sptam.git`
+`git clone git@github.com:CIFASIS/sptam.git`
 
 # ROS Package
 
@@ -199,7 +208,7 @@ To activate Loop Closing capabilities (requires DBoW2 and OpenGV dependencies).
 
 `catkin_make --pkg sptam -DCMAKE_BUILD_TYPE=RelWithDebInfo -DUSE_LOOPCLOSURE=ON -DSINGLE_THREAD=OFF -DSHOW_TRACKED_FRAMES=ON -DSHOW_PROFILING=ON -DPARALLELIZE=ON`
 
-For more information about compilation flags see [CMAKE flags](#cmakeFlags) section.
+For more information about compilation flags see [CMAKE flags](#cmake-flags) section.
 
 ## Tutorials
 

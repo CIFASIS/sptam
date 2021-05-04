@@ -92,7 +92,7 @@ RUN catkin init
 
 # Clone ros-utils  to catkin_ws
 WORKDIR ${HOME}/catkin_ws/src
-RUN git clone https://github.com/lrse/ros-utils.git
+RUN git clone https://github.com/CIFASIS/ros-utils.git
 
 # Add S-PTAM directory to catkin_ws
 WORKDIR ${HOME}/catkin_ws/src
