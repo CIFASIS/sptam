@@ -97,7 +97,15 @@ This site and the code provided here are under active development. Even though w
 # Docker
 Use S-PTAM with Docker (RECOMENDED)
 
-`docker build . sptam:latest`
+Clone S-PTAM code:
+
+`git clone git@github.com:CIFASIS/sptam.git`
+
+Build docker image:
+
+`docker build . --trag sptam:latest`
+
+Run docker container:
 
 `docker run --name sptam --rm --net=host -it sptam:latest`
 
