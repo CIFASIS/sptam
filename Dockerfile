@@ -27,12 +27,12 @@ RUN cd /usr/src/gtest/ && \
     cp *.so /usr/lib/
 
 ### TODO: It's not clear which version of Eigen to use as stable.
-# Install Eigen 3.2.9 (it seems to work better than 3.2.10)
+# Install Eigen 3.2.10 (S-PTAM finishes KITTI 00)
 WORKDIR /tmp 
 RUN rm -rf /usr/include/eigen3
 RUN git clone https://gitlab.com/libeigen/eigen.git && \
     cd eigen && \
-    git checkout 3.2.9  && \
+    git checkout 3.2.10  && \
     mkdir build && cd build && \
     cmake .. -DCMAKE_INSTALL_PREFIX=/usr && \
     make install
