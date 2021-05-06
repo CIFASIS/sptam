@@ -103,7 +103,7 @@ Clone S-PTAM code:
 
 Build docker image:
 
-`docker build . --trag sptam:latest`
+`docker build . --tag sptam:latest`
 
 Run docker container:
 
